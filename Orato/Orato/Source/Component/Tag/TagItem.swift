@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TagButton: View {
+struct Tagarr: View {
     var body: some View {
         HStack{
             ForEach(Tag.allCases,id: \.self){item in
