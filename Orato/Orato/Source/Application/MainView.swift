@@ -1,24 +1,38 @@
 //
-//  ContentView.swift
+//  MainView.swift
 //  Orato
 //
 //  Created by maple on 9/9/25.
 //
 
 import SwiftUI
-
-struct ContentView: View {
+struct MainView: View {
+    @State var selected : TabViewType = .analyze
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack{
+            Color.black
+                .edgesIgnoringSafeArea(.all)
+            VStack{
+                HStack{
+                    Image(.lgo)
+                    Spacer()
+                }
+                .padding(0)
+                    ZStack {
+                        switch selected {
+                        case .record:
+                            recordView(recordVM: RecordViewModel())
+                        case .analyze:
+                            AnalyzView(now_inputing: "")
+                        case .profile:
+                            ProfileView(profileVM: ProfileViewModel()/*,move_record: $selected*/)
+                        }
+                    }
+                TabViewdesign(selected: $selected)
+            }
         }
-        .padding()
     }
 }
-
 #Preview {
-    ContentView()
+    MainView()
 }

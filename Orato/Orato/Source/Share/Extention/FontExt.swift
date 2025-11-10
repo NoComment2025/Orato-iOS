@@ -1,18 +1,18 @@
 //
-//  SecretKey.swift
+//  FontExt.swift
 //  Orato
 //
-//  Created by maple on 9/9/25.
+//  Created by maple on 10/21/25.
 //
 
 import SwiftUI
 
-struct SecretKey: View {
+struct FontExt: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    SecretKey()
+    FontExt()
 }

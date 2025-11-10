@@ -1,18 +1,18 @@
 //
-//  recordView.swift
+//  topbar.swift
 //  Orato
 //
-//  Created by maple on 9/15/25.
+//  Created by maple on 9/16/25.
 //
 
 import SwiftUI
 
-struct recordView: View {
+struct topbar: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    recordView()
+    topbar()
 }
