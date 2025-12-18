@@ -7,12 +7,19 @@
 
 import SwiftUI
 
-struct LoginModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+struct LoginModel : Encodable{
+    var username : String
+    var password : String
 }
 
-#Preview {
-    LoginModel()
+struct LoginResponse : Decodable {
+    let status : Int
+    let data : data
+}
+
+struct data : Decodable {
+    let access : String
+    let name : String
+    let username : String
+    let email : String
 }

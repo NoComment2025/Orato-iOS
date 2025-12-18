@@ -7,12 +7,17 @@
 
 import SwiftUI
 
-struct AnalyzeViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+class AnalyzeViewModel : ObservableObject{
+    @Published var info : AnalyzeModel = AnalyzeModel(topic: "", tag: .all, hasTimeLimit: false, currentTime: Date())
+    
+    func yaho() async {
+        do {
+            let result = try await NetworkRunner.share.request("/analyze/sound", method: .post, parameters: info,response: Bool.self)
+            
+        } catch {
+            
+        }
+        
+        
     }
-}
-
-#Preview {
-    AnalyzeViewModel()
 }

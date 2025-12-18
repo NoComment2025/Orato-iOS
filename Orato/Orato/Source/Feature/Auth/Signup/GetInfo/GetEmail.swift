@@ -16,10 +16,10 @@
 
 import SwiftUI
 
-struct GetNameView: View {
+struct GetEmailView: View {
     @StateObject var SignupVM : SignupViewModel
+    @State var inputname : String = ""
     @Binding var step : Int
-    
     var body: some View {
         ZStack{
             AuthBackground()
@@ -27,21 +27,22 @@ struct GetNameView: View {
             RoundedRectangle(cornerRadius: 25)
                 .opacity(0.7)
                 .frame(width: 343,height: 780)
-                
                 .overlay{
                     VStack{
                         Image("Lgo")
                             .padding(.bottom,76)
                         HStack{
-                            Text("이름")
+                            
+                            Text("이메일")
                                 .padding(.leading,52)
                                 .padding(.bottom,3)
                                 .foregroundStyle(.white)
                                 .font(.medium(22))
                             Spacer()
                         }
-                        AuthTextField(showing: "이름를 입력하세요", input:$SignupVM.getinfo.name)
+                        AuthTextField(showing: "이메일를 입력하세요", input:$SignupVM.getinfo.email)
                             .padding(.bottom,249)
+                       
                        
                         Button{
                             step += 1
@@ -55,11 +56,8 @@ struct GetNameView: View {
                                 
                         }
                         .padding(.bottom,48)
-                        
-                        
                     }
                 }
-                
         }
         
     }

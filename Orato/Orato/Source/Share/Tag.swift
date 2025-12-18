@@ -7,12 +7,28 @@
 
 import SwiftUI
 
-struct Tag: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+enum Tag : String, CaseIterable, Codable{
+    case all
+    case presentation
+    case speech
+    case talk
+    case etc
+    
+    var text : String{
+        switch self{
+        case .all:
+            return "전체"
+        case .presentation:
+            return "발표"
+        case .speech:
+            return "연설"
+        case .talk:
+            return "강연"
+        case .etc:
+            return "기타"
+        }
     }
-}
-
-#Preview {
-    Tag()
+    
+    
+    
 }

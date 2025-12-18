@@ -6,13 +6,32 @@
 //
 
 import SwiftUI
+import Alamofire
 
-struct recordViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct VodResponse :Decodable{}
+
+@MainActor
+class RecordViewModel : ObservableObject{
+    @Published var array : [RecordModel] = [
+        
+    ]
+    
+    func getlist() async{
+        do{
+            let lst = try await NetworkRunner.share.request("records",method: .get, response: RecordResponse.self)
+            array = lst.records
+            print("됨")
+            
+        } catch{
+            print(error.localizedDescription)
+        }
     }
-}
-
-#Preview {
-    recordViewModel()
+    
+    func deletelist(id : String) async {
+        do {
+            let result = try await NetworkRunner.share.request("/", method: .delete, parameters: ["id" : id])
+        } catch {
+            
+        }
+    }
 }

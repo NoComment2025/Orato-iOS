@@ -7,7 +7,7 @@
 
 import SwiftUI
 struct CustomField: View {
-    @State var input : String = ""
+    @Binding var input : String
     
     var txt : String = ""
     var body: some View {
@@ -17,7 +17,8 @@ struct CustomField: View {
                     TextField(
                         txt,text: $input)
                         .padding(.leading  ,13)
-                        .foregroundStyle(.fieldtextcolor)
+//                        .foregroundStyle(.fieldtextcolor)
+                        .foregroundStyle(.white)
 //                    Button{
 //                        
 //                    }label: {

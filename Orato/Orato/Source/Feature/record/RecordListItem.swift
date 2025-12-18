@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct RecordListItem: View {
-    var topic : String = "주제"
-    var date : Int = 1
-    var tag : Tag = .presentation
-    var progress : progress = .ing
-    @Binding var content : String
+    @Binding var item : RecordModel
+    @State private var content: String = ""
     @State var ischecked : Bool = false
     @State var sheet : Bool = false
     @State var alert : Bool = false
+//    @State var tag : Tag
     var body: some View {
         Rectangle()
             .foregroundStyle(.tcolor)
@@ -24,6 +22,7 @@ struct RecordListItem: View {
             .overlay {
                 VStack{
                     HStack{
+                        
                         Button{
                             ischecked.toggle()
                         }label: {
@@ -32,42 +31,44 @@ struct RecordListItem: View {
                         }
                         .frame(width: 21,height: 21)
                         .padding(.horizontal,15)
+                        
                         Button{
-                            if progress == .success{sheet.toggle()}
+                            if item.status == progress.success.rawValue{sheet.toggle()}
                             else{alert.toggle()}
                         }label: {
-                            Text(topic)
+                            Text(item.topic)
                                 .foregroundStyle(.white)
                         }
-                        .alert("열람불가1", isPresented: $alert, actions: {
-                            Text("열람 불가")
+                        .alert("열람불가", isPresented: $alert, actions: {
+                            
                         })
                         .sheet(isPresented: $sheet){
-                            DetailView(content: $content)
+                            DetailView(content: item,alert: $alert)
                                 
                         }
                         
-                        Text("\(date)")
+                        Text("\($item.createdDate)")
                             .foregroundStyle(.white)
                         Spacer()
                     }
                     HStack{
                         Rectangle()
                         .frame(width: 70,height: 36)
-                        .background(Color.tagSelected)
-                        .foregroundColor(.white)
+                        .background(.tagSelected)
+                        .foregroundColor(.tagSelected)
                         .cornerRadius(30)
                         .overlay {
-                            Text("\(tag.text)")
+                            Text("\(Tag(rawValue: item.tag)?.text)")
+                                .foregroundStyle(.white)
                         }
                         .padding(.horizontal,15)
                         Rectangle()
                         .frame(width: 70,height: 36)
                         .background(Color.tagSelected)
-                        .foregroundColor(progress.color)
+                        .foregroundColor(progress(rawValue: item.status)?.color)
                         .cornerRadius(30)
                         .overlay {
-                            Text("\(progress.text)")
+                            Text("\(progress(rawValue: item.status)?.text)")
                         }
                         .padding(.leading,13)
                         Spacer()
@@ -77,17 +78,20 @@ struct RecordListItem: View {
                     
                     
                 }
+            .onAppear {
+                content = item.feedbackMd
+            }
         
             }
     }
 
 
 
-enum progress : String{
-    case wait
-    case success
-    case ing
-    case failure
+enum progress : String, Codable{
+    case wait = "wait"
+    case success = "success"
+    case ing = "ing"
+    case failure = "failure"
     
     var text : String{
         switch self{

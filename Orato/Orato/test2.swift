@@ -1,18 +1,38 @@
-//
-//  test2.swift
-//  Orato
-//
-//  Created by maple on 10/16/25.
-//
-
 import SwiftUI
+import PhotosUI
 
-struct test2: View {
+struct PhotoPickerExample: View {
+    @State private var selectedItem: PhotosPickerItem? = nil
+    @State private var selectedImageData: Data? = nil
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+        VStack {
+            if let data = selectedImageData,
+               let image = UIImage(data: data) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 200)
+            }
 
-#Preview {
-    test2()
+            PhotosPicker(
+                selection: $selectedItem,
+                matching: .images,
+                photoLibrary: .shared()) {
+                    Text("사진 선택하기")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(8)
+                }
+        }
+        .onChange(of: selectedItem) { newItem in
+            Task {
+                // 선택된 항목의 데이터 가져오기
+                if let data = try? await newItem?.loadTransferable(type: Data.self) {
+                    selectedImageData = data
+                }
+            }
+        }
+    }
 }

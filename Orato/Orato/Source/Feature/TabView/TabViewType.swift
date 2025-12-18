@@ -7,12 +7,31 @@
 
 import SwiftUI
 
-struct TabView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+enum TabViewType : CaseIterable{
+    
+    case record
+    case analyze
+    case profile
+    
+    var image : String{
+        switch self{
+        case .analyze:
+            return "analyze_tab"
+        case .record:
+            return "record_tab"
+        case .profile:
+            return "profile_tab"
+        }
     }
-}
-
-#Preview {
-    TabView()
+    
+    var text : String{
+        switch self{
+        case .analyze:
+            return "분석"
+        case .record:
+            return "기록"
+        case .profile:
+            return "프로필"
+        }
+    }
 }

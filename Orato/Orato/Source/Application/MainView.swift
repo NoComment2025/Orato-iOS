@@ -23,7 +23,7 @@ struct MainView: View {
                         case .record:
                             recordView(recordVM: RecordViewModel())
                         case .analyze:
-                            AnalyzView(now_inputing: "")
+                            AnalyzView()
                         case .profile:
                             ProfileView(profileVM: ProfileViewModel()/*,move_record: $selected*/)
                         }

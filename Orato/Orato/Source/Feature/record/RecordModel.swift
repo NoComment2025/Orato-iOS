@@ -7,12 +7,32 @@
 
 import SwiftUI
 
-struct recordModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+struct yaho : Identifiable,Codable{
+    var id = UUID()
+    var topic : String
+    var content : String
+    var date : Int
+    var tag : Tag
+    var progress : progress
+    var ischecked : Bool = false
+    var currentTime : Date
 }
 
-#Preview {
-    recordModel()
+//struct recordResponse : Decodable {
+//    let
+//}
+struct RecordModel : Decodable, Identifiable {
+    var id : Int
+    var topic : String
+    var status : String
+    var type : String
+    var feedbackMd : String
+    var tag : String
+    var createdDate : String
+    var updatedDate : String
+    var analysis_id : Int
+}
+
+struct RecordResponse : Decodable {
+    let records : [RecordModel]
 }

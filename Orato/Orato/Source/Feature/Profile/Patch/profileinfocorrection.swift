@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct profilepwCorrection: View {
+struct InfocorrectionView: View {
     @ObservedObject var profileVM : ProfileViewModel
-    @Binding var ispresented : Bool
-    @State var before : String = ""
-    @State var after : String = ""
+    
+    @State var aftername : String = ""
+    @State var afterid : String = ""
     var body: some View {
         ZStack{
             Color.black
@@ -19,33 +19,32 @@ struct profilepwCorrection: View {
                 .foregroundStyle(.tcolor)
                 .overlay{
                     VStack{
-                        Text("비밀번호 변경")
+                        Text("프로필 수정")
                             .foregroundStyle(.white)
                             .font(.bold(20))
                             .padding(.bottom,20)
+                            
                         HStack{
-                            Text("기존 비밀번호")
+                            Text("아이디")
                                 .foregroundStyle(.white)
-                                .padding(.leading,40)
                                 .font(.semibold(18))
+                                .padding(.leading,40)
                             Spacer()
+                            
                         }
-                        AuthTextField(input:$profileVM.patchpw.currentpw)
+                        AuthTextField(showing: profileVM.userInfo.id, input: $afterid)
                             .padding(.bottom,20)
                         HStack{
-                            Text("새로운 비밀번호")
+                            Text("이름")
                                 .foregroundStyle(.white)
-                                .padding(.leading,40)
                                 .font(.semibold(18))
+                                .padding(.leading,40)
                             Spacer()
                         }
-                        AuthTextField(input: $profileVM.patchpw.changepw)
+                        AuthTextField(showing: profileVM.userInfo.name, input: $aftername)
                             .padding(.bottom,20)
                         Button{
-                            Task{
-                                await profileVM.patchprofile()
-                                ispresented.toggle()
-                            }
+                         
                         }label: {
                             RoundedRectangle(cornerRadius: 10)
                                 .frame(width: 165,height: 40)
@@ -57,9 +56,11 @@ struct profilepwCorrection: View {
                                 }
                             }
                         }
+                        
                     }
                 }
                 .frame(width: 340,height: 360)
+                .foregroundStyle(.gray)
             
         }
     }
@@ -67,5 +68,5 @@ struct profilepwCorrection: View {
 
 #Preview {
     @Previewable @State var ispresented : Bool = false
-    profilepwCorrection(profileVM : ProfileViewModel(), ispresented: $ispresented)
+    InfocorrectionView(profileVM : ProfileViewModel())
 }
