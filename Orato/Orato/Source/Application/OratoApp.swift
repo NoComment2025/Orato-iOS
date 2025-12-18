@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct OratoApp: App {
+    @AppStorage("access") private var accesstoken : String?
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if accesstoken == nil {
+                LoginView()
+            }else{
+                MainView()
+                    .onAppear {
+                        print("yaho")
+                    }
+            }
         }
+        
     }
 }

@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-struct endpoint: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-#Preview {
-    endpoint()
+enum endpoint : String{
+    case archive = "/히히/행복해요"
 }

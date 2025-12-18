@@ -8,8 +8,22 @@
 import SwiftUI
 
 struct Search_Textfield: View {
+    @State var tex : String = ""
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TextField("입력",text: $tex)
+            .textFieldStyle(.roundedBorder)
+            .overlay {
+                HStack{
+                    Spacer()
+                    Button{
+                        
+                    }label: {
+                        Image(systemName: "circle")
+                    }
+                }
+            }
+            .frame(width: 140)
+            
     }
 }
 

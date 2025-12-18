@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct AnalyzeModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+struct AnalyzeModel: Codable{
+//    var id = UUID()
+    var topic : String = ""
+    var tag : Tag = .all
+    var hasTimeLimit : Bool = false
+    var analyzeTime : Int?
+    var currentTime : Date
 }
 
-#Preview {
-    AnalyzeModel()
-}
